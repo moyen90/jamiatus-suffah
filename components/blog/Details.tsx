@@ -1,7 +1,7 @@
 "use client"
 
 import { notFound } from "next/navigation";
-
+import { UserIcon, CalendarIcon, ClockIcon } from "lucide-react"
 const blogPosts = [
   {
     id: 1,
@@ -102,7 +102,44 @@ export const Details = ({ slug }: { slug: string }) => {
 
     return (
     <div>
-        This is Details Page
+         <main className="container mx-auto px-4 py-8 md:px-6 lg:py-12">
+      <article className="max-w-3xl mx-auto space-y-8">
+        {/* Blog Post Header */}
+        <header className="space-y-4 text-center">
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">{post.title}</h1>
+          <div className="flex items-center justify-center space-x-4 text-muted-foreground text-sm md:text-base">
+            <div className="flex items-center gap-1">
+              <UserIcon className="w-4 h-4" />
+              <span>{post.author}</span>
+            </div>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <div className="flex items-center gap-1">
+              <CalendarIcon className="w-4 h-4" />
+              <span>
+                {new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+              </span>
+            </div>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <div className="flex items-center gap-1">
+              <ClockIcon className="w-4 h-4" />
+              <span>{post.readTime}</span>
+            </div>
+          </div>
+        </header>
+        {/* Blog Post Content */}
+        <div className="prose prose-lg mx-auto dark:prose-invert text-gray-800 dark:text-gray-200">
+          <p className="lead text-xl font-medium text-gray-700 dark:text-gray-300 mb-6">{post.excerpt}</p>
+          <p>{post.answer}</p>
+        </div>
+
+        {/* Optional: Footer with category */}
+        <footer className="text-center text-muted-foreground pt-8 border-t border-gray-200 dark:border-gray-700 mt-12">
+          <p className="text-sm">
+            Category: <span className="font-semibold text-primary">{post.category}</span>
+          </p>
+        </footer>
+      </article>
+    </main>
     </div>
     )
 }

@@ -125,41 +125,53 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto max-w-7xl">
-            {blogPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`}>
-                <Card className="h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer group">
-                  {/* <div className="aspect-video overflow-hidden rounded-t-lg">
-                    <img
-                      src={post.image || "/placeholder.svg"}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div> */}
-                  <CardHeader>
-                    <CardTitle className="line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {post.title}
-                    </CardTitle>
-                    <CardDescription className="line-clamp-3">{post.excerpt}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 mr-1" />
-                        {post.author}
-                      </div>
-                      <div className="flex items-center">
-                        <CalendarDays className="w-4 h-4 mr-1" />
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+      {blogPosts.map((post) => {
+  const shortExcerpt =
+    post.excerpt.length > 80
+      ? post.excerpt.substring(0, 80) + "..."
+      : post.excerpt;
+
+  return (
+    <Card
+      key={post.slug}
+      className="h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer group"
+    >
+      <Link href={`/blog/${post.slug}`}>
+        <CardHeader>
+          <CardTitle className="line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            {post.title}
+          </CardTitle>
+          <CardDescription>{shortExcerpt}</CardDescription>
+        </CardHeader>
+      </Link>
+
+      <CardContent>
+        <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
+          <div className="flex items-center">
+            <User className="w-4 h-4 mr-1" />
+            {post.author}
+          </div>
+          <div className="flex items-center">
+            <CalendarDays className="w-4 h-4 mr-1" />
+            {new Date(post.date).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </div>
+        </div>
+
+        {/* ✅ Read More button */}
+        <Link href={`/blog/${post.slug}`}>
+          <button className="mt-2 px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+            Read More →
+          </button>
+        </Link>
+      </CardContent>
+    </Card>
+  );
+})}
+
           </div>
         </div>
       </section>
