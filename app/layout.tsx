@@ -58,7 +58,7 @@ export default function RootLayout({
           </nav>
 
           {/* Main Content */}
-          <main>{children}</main>
+          <main className="min-h-[90vh]">{children}</main>
 
           {/* Footer */}
           <footer className="border-t bg-gray-50 dark:bg-gray-900">

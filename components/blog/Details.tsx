@@ -1,10 +1,7 @@
-import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { CalendarDays, Clock, User, PlusCircle } from "lucide-react"
+"use client"
 
-// Sample blog data - in a real app, this would come from a CMS or database
+import { notFound } from "next/navigation";
+
 const blogPosts = [
   {
     id: 1,
@@ -93,76 +90,19 @@ const blogPosts = [
 ];
 
 
-export default function HomePage() {
-  return (
-    <div className="min-h-screen bg-background ">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-50 to-indigo-100 dark:from-blue-950 dark:to-indigo-950 py-20">
-        <div className="mx-auto max-w-7xl px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">Welcome to DevBlog</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-            Discover the latest insights, tutorials, and best practices in web development, design, and technology.
-          </p>
-          <Link href="/create">
-          <div className="flex items-center justify-center gap-2">
-            <Button size="lg" className="">
-              <PlusCircle className="h-5 w-5" />
-              Create New Post
-            </Button>
-          </div>
-          </Link>
-        </div>
-      </section>
 
-      {/* Blog Posts Grid */}
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Latest Posts</h2>
-            <Badge variant="secondary" className="text-sm">
-              {blogPosts.length} articles
-            </Badge>
-          </div>
+export const Details = ({ slug }: { slug: string }) => {
+  console.log(slug)
+    const post = blogPosts.find((p) => p.slug === slug)
+    console.log(post)
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto max-w-7xl">
-            {blogPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`}>
-                <Card className="h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer group">
-                  {/* <div className="aspect-video overflow-hidden rounded-t-lg">
-                    <img
-                      src={post.image || "/placeholder.svg"}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div> */}
-                  <CardHeader>
-                    <CardTitle className="line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {post.title}
-                    </CardTitle>
-                    <CardDescription className="line-clamp-3">{post.excerpt}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 mr-1" />
-                        {post.author}
-                      </div>
-                      <div className="flex items-center">
-                        <CalendarDays className="w-4 h-4 mr-1" />
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+  if (!post) {
+    notFound()
+  }
+
+    return (
+    <div>
+        This is Details Page
     </div>
-  )
+    )
 }
