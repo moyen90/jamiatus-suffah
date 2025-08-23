@@ -1,0 +1,1 @@
+export const BLOG = '/api/v1/blogs'
