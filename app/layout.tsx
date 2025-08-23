@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "EasyCourier",
-  description: "EasyCourier is a user-friendly web-based delivery management system that streamlines courier operations for shop owners, admins, and delivery personnel. Built with modern technologies, it simplifies order creation, assignment, tracking, and status updates — ensuring efficient and transparent delivery workflows.",
+  title: "Blogs",
+  description: "This is Islamic BLogs.",
 };
 
 export default function RootLayout({

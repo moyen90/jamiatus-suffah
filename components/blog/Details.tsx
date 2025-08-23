@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { UserIcon, CalendarIcon, ClockIcon } from "lucide-react";
+import { UserIcon, CalendarIcon } from "lucide-react";
 import { useGetBlogById } from "@/apis/blogs";
 
 export const Details = ({ uid }: { uid: string }) => {
