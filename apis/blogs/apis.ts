@@ -2,6 +2,18 @@
 import { apiClient } from "@/utils/apiCLient";
 import { BLOG } from "./endpoints";
 
+// Define BlogType or import it from the correct module
+ type BlogType = {
+  uid: string;
+  title: string;
+  content: string;
+  description: string;
+  date: string;          // ISO date string
+  category?: string;
+  createdAt?: number;    // timestamp, optional
+};
+
+
 // Create a blog
 export const createBlog = async (values: any) => {
   try {
@@ -19,13 +31,9 @@ type GetBlogsParams = {
   category?: string;
 };
 
-export const getBlogs = async ({ search, category }: GetBlogsParams = {}): Promise<any> => {
-  const params: any = {};
-  if (search) params.search = search;
-  if (category) params.category = category;
-
-  const response = await apiClient.get(BLOG, { params });
-  return response.data;
+export const getBlogs = async (): Promise<BlogType[]> => {
+  const response = await apiClient.get(BLOG);
+  return response.data.data;
 };
 
 // Get blog by ID

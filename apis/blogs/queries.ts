@@ -2,23 +2,15 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { createBlog, deleteBlog, getBlogById, getBlogs, updateBlog } from "./apis";
 import { toast } from "react-toastify";
 
-type BlogType = {
-  _id: string;
+
+export type BlogType = {
+  uid: string;
   title: string;
   content: string;
+  description: string;
+  date: string;          // ISO date string
   category?: string;
-  author: {
-    _id: string;
-    name: string;
-    email?: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-type GetBlogsParams = {
-  search?: string;
-  category?: string;
+  createdAt?: number;    // timestamp, optional
 };
 
 // Create Blog
@@ -32,10 +24,11 @@ export const useCreateBlog = () => {
 }
 
 // Get Blogs
-export const useGetBlogs = ({ search = "", category = "" }: GetBlogsParams = {}) => {
+// React Query hook
+export const useGetBlogs = () => {
   return useQuery<BlogType[], Error>({
-    queryKey: ["blogs", search, category],
-    queryFn: () => getBlogs({ search, category }),
+    queryKey: ["blogs"],
+    queryFn: getBlogs,
   });
 };
 
