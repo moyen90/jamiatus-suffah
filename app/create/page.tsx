@@ -33,13 +33,15 @@ const estimateReadTime = (content: string) => {
   const wordsPerMinute = 200
   const numberOfWords = content.trim().split(/\s+/).filter(Boolean).length
   const minutes = numberOfWords / wordsPerMinute
-  return Math.ceil(minutes) + " min read"
+  return Math.ceil(minutes) + " min"
 }
 
 const CreatePage = () => {
   const [viewMode, setViewMode] = useState<"edit" | "preview" | "split">("edit")
   const router = useRouter()
-  const { mutateAsync,isLoading } = useCreateBlog()
+  const { mutateAsync } = useCreateBlog()
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,6 +57,7 @@ const CreatePage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values)
     try {
+      setIsLoading(true)
       await mutateAsync({
         title: values.title,
         content: values.content,
@@ -63,6 +66,7 @@ const CreatePage = () => {
         category: values.category,
       })
       router.push("/")
+      setIsLoading(false)
     } catch (error) {
       console.error("Failed to create blog", error)
     }
@@ -78,8 +82,8 @@ const CreatePage = () => {
             {/* Blog Editor */}
             <Card className="col-span-1 lg:col-span-2">
               <CardHeader>
-                <CardTitle>Blog Post</CardTitle>
-                <CardDescription>Fill all the fields carefully.</CardDescription>
+                <CardTitle>মাসালা-মাসায়েল</CardTitle>
+                <CardDescription>সঠিক দিকনির্দেশনা প্রদান করুন।</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Title */}
@@ -88,11 +92,10 @@ const CreatePage = () => {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Title</FormLabel>
+                      <FormLabel>টাইটেল</FormLabel>
                       <FormControl>
-                        <Input placeholder="Title of your blog post" {...field} />
+                        <Input placeholder="টাইটেল লিখুন " {...field} />
                       </FormControl>
-                      <FormDescription>This is the title of your blog post.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -108,7 +111,7 @@ const CreatePage = () => {
                           <CardHeader>
                             <CardTitle className="flex items-center justify-between">
                               <span className="flex items-center">
-                                <FileText className="w-5 h-5 mr-2" /> Content
+                                <FileText className="w-5 h-5 mr-2" /> মাসায়েল
                               </span>
                               <div className="flex items-center gap-2">
                                 <Button type="button" variant={viewMode === "edit" ? "default" : "outline"} size="sm" onClick={() => setViewMode("edit")}>
@@ -122,7 +125,6 @@ const CreatePage = () => {
                                 </Button>
                               </div>
                             </CardTitle>
-                            <CardDescription>Write your blog post using Markdown syntax.</CardDescription>
                           </CardHeader>
                           <CardContent>
                             {viewMode === "edit" && (
@@ -131,8 +133,8 @@ const CreatePage = () => {
                                   <MarkdownEditor value={field.value} onChange={field.onChange} />
                                 </FormControl>
                                 <div className="text-sm text-muted-foreground">
-                                  Word count: {field.value.trim().split(/\s+/).filter(Boolean).length} words
-                                  {field.value && ` • Estimated read time: ${estimateReadTime(field.value)}`}
+                                  শব্দ গণনা: {field.value.trim().split(/\s+/).filter(Boolean).length} শব্দ
+                                  {field.value && ` • পড়তে সময় লাগবে : ${estimateReadTime(field.value)}`}
                                 </div>
                               </div>
                             )}
@@ -170,58 +172,18 @@ const CreatePage = () => {
             {/* Blog Meta */}
             <Card className="col-span-1">
               <CardHeader>
-                <CardTitle>Meta</CardTitle>
-                <CardDescription>Blog post meta information.</CardDescription>
+                <CardTitle>সাধারণ তথ্য</CardTitle>
+                <CardDescription>মাসায়েলের সাধারণ তথ্য।</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Description" className="resize-none" {...field} />
-                      </FormControl>
-                      <FormDescription>This is the description of your blog post.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="date"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col space-y-3">
-                      <FormLabel>Date</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={"outline"}
-                              className={cn("w-[240px] pl-3 text-left font-normal", !field.value && "text-muted-foreground")}
-                            >
-                              {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar mode="single" selected={field.value} onSelect={field.onChange} disabled={(date) => date > new Date() || date < new Date("1900-01-01")} initialFocus />
-                        </PopoverContent>
-                      </Popover>
-                      <FormDescription>Date of publish.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+
                 <FormField
                   control={form.control}
                   name="category"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Category</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormLabel>ক্যাটাগরি</FormLabel>
+                      {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select a category" />
@@ -235,8 +197,12 @@ const CreatePage = () => {
                           <SelectItem value="CSS">CSS</SelectItem>
                           <SelectItem value="Performance">Performance</SelectItem>
                         </SelectContent>
-                      </Select>
-                      <FormDescription>Category of your blog post.</FormDescription>
+                      </Select> */}
+
+                      <FormControl>
+                        <Input placeholder="ক্যাটাগরি লিখুন" {...field} />
+                      </FormControl>
+                      <FormDescription>মাসায়েল এর ক্যাটাগরি.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}

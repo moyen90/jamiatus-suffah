@@ -11,14 +11,14 @@ export const UserLayout = ({
   return (
     <div className=''>
       <div className='w-full'>
-           {/* Navigation */}
-              <Navbar />
-              <div className="min-h-[80vh]">
-                {children}
-              </div>
-          {/* Footer */}
-             <Footer />
+        {/* Navigation */}
+        {/* <Navbar /> */}
+        <div className="min-h-[80vh]">
+          {children}
         </div>
+        {/* Footer */}
+        {/* <Footer /> */}
+      </div>
     </div>
   );
 };
