@@ -7,14 +7,13 @@ export default function AboutPage() {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">About DevBlog</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">সুফ্ফাহ সেন্টার সম্পর্কে</h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              We're passionate about sharing knowledge and helping developers grow their skills through high-quality
-              content and practical tutorials.
+              সুফ্ফাহ সেন্টার হলো জামিয়াতুসসুফ্ফাহ-এর অফিসিয়াল ফতোয়া কেন্দ্র, যা কোরআন ও সুন্নাহভিত্তিক নির্ভরযোগ্য ইসলামিক দিকনির্দেশনা প্রদান করে।
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <Card>
               <CardHeader>
                 <CardTitle>Our Mission</CardTitle>
@@ -42,26 +41,27 @@ export default function AboutPage() {
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
 
           <Card>
             <CardHeader>
-              <CardTitle>Our Story</CardTitle>
-              <CardDescription>How DevBlog came to be</CardDescription>
+              <CardTitle>আমাদের গল্প</CardTitle>
+              <CardDescription>সুফ্ফাহ সেন্টার কিভাবে প্রতিষ্ঠিত হয়েছে</CardDescription>
             </CardHeader>
             <CardContent className="prose prose-gray dark:prose-invert max-w-none">
-              <p>
+              <p>ভবিষ্যতে আসছে...</p>
+              {/* <p>
                 DevBlog was founded by a group of passionate developers who wanted to create a platform for sharing
                 knowledge and best practices in web development.
-              </p>
-              <p>
+              </p> */}
+              {/* <p>
                 We believe that the best way to learn is by doing, and our content reflects that philosophy. Every
                 article includes practical examples and real-world applications that you can use in your own projects.
               </p>
               <p>
                 Our team consists of experienced developers, designers, and technical writers who are committed to
                 creating high-quality content that helps our readers succeed in their careers.
-              </p>
+              </p> */}
             </CardContent>
           </Card>
         </div>

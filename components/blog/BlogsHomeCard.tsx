@@ -20,7 +20,11 @@ export const BlogsHomeCard = () => {
   }
 
   if (!blogs || blogs.length === 0) {
-    return <p className="text-center col-span-full">No blogs found.</p>;
+    return (
+      <div className="w-full text-center py-20">
+        <h1 className="text-2xl font-bold text-black dark:text-white">কোন মাসালা-মাসায়েল পাওয়া যায়নি।</h1>
+      </div>
+    );
   }
 
   return (

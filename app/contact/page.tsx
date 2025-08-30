@@ -16,8 +16,8 @@ export default function ContactPage() {
               Have a question, suggestion, or just want to say hello? We'd love to hear from you.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div><h3>This section is coming soon....</h3></div>
+          {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
@@ -70,10 +70,10 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 dark:text-gray-300 mb-2">For general inquiries:</p>
-                  <p className="font-medium">hello@devblog.com</p>
+                  <p className="font-medium">hello@suffahcenter.com</p>
 
                   <p className="text-gray-600 dark:text-gray-300 mb-2 mt-4">For technical support:</p>
-                  <p className="font-medium">support@devblog.com</p>
+                  <p className="font-medium">support@suffahcenter.com</p>
                 </CardContent>
               </Card>
 
@@ -103,7 +103,7 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
