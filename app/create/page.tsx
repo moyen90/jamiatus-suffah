@@ -24,8 +24,6 @@ import { useCreateBlog } from "@/apis/blogs"
 const formSchema = z.object({
   title: z.string().min(2, { message: "Title must be at least 2 characters." }),
   content: z.string().min(10, { message: "Content must be at least 10 characters." }),
-  description: z.string().min(10, { message: "Description must be at least 10 characters." }),
-  date: z.date(),
   category: z.string().min(2, { message: "Category must be at least 2 characters." }),
 })
 
@@ -48,8 +46,6 @@ const CreatePage = () => {
     defaultValues: {
       title: "",
       content: "",
-      description: "",
-      date: new Date(),
       category: "",
     },
   })
@@ -61,8 +57,6 @@ const CreatePage = () => {
       await mutateAsync({
         title: values.title,
         content: values.content,
-        description: values.description,
-        date: values.date.toISOString(),
         category: values.category,
       })
       router.push("/")
