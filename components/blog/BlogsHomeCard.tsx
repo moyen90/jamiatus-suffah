@@ -35,8 +35,6 @@ export const BlogsHomeCard = () => {
           post={{
             uid: blog.uid,
             title: blog.title,
-            description: blog.description,
-            date: blog.date
           }}
         />
       ))}

@@ -6,8 +6,6 @@
 interface BlogPost {
   title: string
   content: string
-  description: string
-  date: string
   category: string
 }
 

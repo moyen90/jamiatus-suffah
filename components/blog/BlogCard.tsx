@@ -12,9 +12,7 @@ import { CalendarDays } from "lucide-react";
 
 interface BlogPost {
   uid: string;
-  title: string;
-  description: string;
-  date: string;
+  title: string
 }
 
 interface BlogCardProps {
@@ -22,12 +20,6 @@ interface BlogCardProps {
 }
 
 export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
-  const formattedDate = new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC", // deterministic for SSR + client
-  }).format(new Date(post.date));
 
   return (
     <div>
@@ -37,17 +29,10 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
             <CardTitle className="line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               {post.title}
             </CardTitle>
-            <CardDescription className="line-clamp-3">
-              {post.description}
-            </CardDescription>
           </CardHeader>
         </Link>
 
         <CardContent>
-          <div className="flex items-center text-sm text-muted-foreground mb-2">
-            <CalendarDays className="w-4 h-4 mr-1" />
-            {formattedDate}
-          </div>
 
           <Link href={`/blog/${post.uid}`}>
             <button className="mt-2 px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
