@@ -82,11 +82,11 @@ export const Details = ({ uid }: { uid: string }) => {
       {blog.category && (
         <p className="text-sm text-gray-500 mb-2">Category: {blog.category}</p>
       )}
-      {blog.date && (
+      {/* {blog.date && (
         <div className="flex items-center gap-4 text-gray-400 text-sm mb-4">
           <CalendarIcon className="w-4 h-4" /> <span>{blog.date}</span>
         </div>
-      )}
+      )} */}
       {blog.author && (
         <div className="flex items-center gap-2 text-gray-500 mb-4">
           <UserIcon className="w-4 h-4" /> <span>{blog.author}</span>
