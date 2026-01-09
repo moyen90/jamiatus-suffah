@@ -6,7 +6,8 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { HelpCircle, Mail, User, Clock, Trash2, CheckCircle2, AlertCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { HelpCircle, Mail, User, Clock, MessageSquare, CheckCircle2, AlertCircle } from "lucide-react"
 
 const ADMIN_EMAILS = [
     'dev.moyenislam@gmail.com',
@@ -64,8 +65,8 @@ export default function QuestionsDashboard() {
             {/* Background Decor */}
             <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-black/[0.02] dark:bg-white/[0.01] rounded-full blur-[120px] -z-10 pointer-events-none" />
 
-            <div className="space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 px-10 md:px-14">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
                     <div className="space-y-4">
                         <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-black dark:text-white text-xs font-black uppercase tracking-[0.3em] shadow-sm">
                             <HelpCircle className="h-4 w-4" />
@@ -74,65 +75,85 @@ export default function QuestionsDashboard() {
                         <h1 className="text-6xl font-black tracking-tighter leading-none">
                             ব্যবহারকারীর <span className="opacity-40">জিজ্ঞাসাসমূহ</span>
                         </h1>
-                        <p className="text-muted-foreground/80 text-xl font-bold leading-relaxed max-w-2xl">
-                            সবগুলো প্রশ্নের তালিকা এখানে পাওয়া যাবে। উত্তর প্রদান করে ব্যবহারকারীকে সহায়তা করুন।
-                        </p>
                     </div>
 
-                    <div className="p-8 rounded-[2.5rem] bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 backdrop-blur-xl flex flex-col items-center justify-center text-center w-full md:w-auto">
-                        <p className="text-4xl font-black tracking-tighter">{questions?.length || 0}</p>
-                        <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-30 mt-1">মোট প্রশ্ন</p>
+                    <div className="flex items-center justify-center">
+                        <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-lg border border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] flex flex-col items-center justify-center shadow-inner">
+                            <span className="text-lg md:text-xl font-black tracking-tighter leading-none">
+                                {questions?.length || 0}
+                            </span>
+                            <span className="text-[5px] md:text-[6px] font-black uppercase tracking-[0.1em] opacity-40 mt-1">মোট প্রশ্ন</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-8">
-                    {questions?.length === 0 ? (
-                        <Card className="border border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 backdrop-blur-3xl rounded-[3rem] p-20 text-center space-y-6">
-                            <div className="w-20 h-20 rounded-[1.5rem] bg-black/5 dark:bg-white/5 flex items-center justify-center mx-auto">
-                                <CheckCircle2 className="w-10 h-10 opacity-20" />
-                            </div>
-                            <p className="text-2xl font-black opacity-30 tracking-tight">কোনো প্রশ্ন পাওয়া যায়নি।</p>
-                        </Card>
-                    ) : (
-                        questions?.map((item: any, i: number) => (
-                            <Card key={i} className="group border border-black/5 dark:border-white/5 bg-white/80 dark:bg-black/80 backdrop-blur-3xl rounded-[3rem] overflow-hidden shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-black/5 dark:hover:shadow-white/5">
-                                <CardContent className="p-10 md:p-14 space-y-10">
-                                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-10 border-b border-black/5 dark:border-white/5">
-                                        <div className="flex flex-wrap gap-6 text-sm font-bold">
-                                            <div className="flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-black/5 dark:bg-white/5 transition-colors group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black">
-                                                <User className="w-4 h-4" />
-                                                {item.userName || "অজানা ব্যবহারকারী"}
-                                            </div>
-                                            <div className="flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-black/5 dark:bg-white/5 opacity-60">
-                                                <Mail className="w-4 h-4" />
-                                                {item.userEmail || "ইমেইল দেয়া হয়নি"}
-                                            </div>
-                                            <div className="flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-black/5 dark:bg-white/5 opacity-40">
-                                                <Clock className="w-4 h-4" />
-                                                {item.createdAt ? new Date(item.createdAt).toLocaleDateString('bn-BD') : "তারিখ অজানা"}
-                                            </div>
-                                        </div>
-
-                                        <Badge variant="secondary" className="px-6 py-2.5 rounded-full bg-black dark:bg-white text-white dark:text-black border-none font-black text-[10px] uppercase tracking-[0.2em] shadow-sm animate-pulse">
-                                            Pending Action
-                                        </Badge>
-                                    </div>
-
-                                    <div className="space-y-6">
-                                        <div className="flex items-center gap-3 opacity-30">
-                                            <HelpCircle className="w-5 h-5 flex-none" />
-                                            <p className="text-[10px] font-black uppercase tracking-[0.3em]">ব্যবহারকারীর প্রশ্ন</p>
-                                        </div>
-                                        <p className="text-2xl md:text-3xl font-black leading-snug tracking-tighter text-foreground group-hover:opacity-100 transition-opacity">
-                                            {item.question}
-                                        </p>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        ))
-                    )}
-                </div>
+                <p className="text-muted-foreground/80 text-xl font-bold leading-relaxed max-w-2xl">
+                    সবগুলো প্রশ্নের তালিকা এখানে পাওয়া যাবে। উত্তর প্রদান করে ব্যবহারকারীকে সহায়তা করুন।
+                </p>
             </div>
+
+            {questions?.length === 0 ? (
+                <div className="rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/5 dark:border-white/5 p-20 text-center space-y-6">
+                    <div className="w-20 h-20 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center mx-auto">
+                        <CheckCircle2 className="w-10 h-10 opacity-20" />
+                    </div>
+                    <p className="text-2xl font-black opacity-30 tracking-tight">কোনো প্রশ্ন পাওয়া যায়নি।</p>
+                </div>
+            ) : (
+                <div className="flex flex-col rounded-xl bg-white/50 dark:bg-black/50 border border-black/5 dark:border-white/5 divide-y divide-black/5 dark:divide-white/5 backdrop-blur-3xl shadow-sm overflow-hidden">
+                    {questions?.map((item: any, i: number) => (
+                        <div key={i} className="p-8 md:p-10 flex flex-col md:flex-row gap-8 md:items-start group">
+                            {/* Index & Icon */}
+                            <div className="flex-none">
+                                <div className="w-12 h-12 rounded-lg bg-black/5 dark:bg-white/5 flex items-center justify-center text-black/40 dark:text-white/40">
+                                    <span className="font-black text-xs">{(i + 1).toString().padStart(2, '0')}</span>
+                                </div>
+                            </div>
+
+                            {/* Main Content */}
+                            <div className="flex-1 space-y-4">
+                                {/* Meta Row */}
+                                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] font-black uppercase tracking-[0.15em] opacity-40">
+                                    <span className="flex items-center gap-2">
+                                        <User className="w-3 h-3" />
+                                        {item.userName || "অজানা"}
+                                    </span>
+                                    <span className="flex items-center gap-2">
+                                        <Clock className="w-3 h-3" />
+                                        {item.createdAt ? new Date(item.createdAt).toLocaleDateString('bn-BD') : "তারিখ অজানা"}
+                                    </span>
+                                </div>
+
+                                {/* Question */}
+                                <h3 className="text-xl md:text-2xl font-black leading-snug tracking-tight">
+                                    {item.question}
+                                </h3>
+
+                                {/* Email (Subtle) */}
+                                <div className="flex items-center gap-2 opacity-20 text-[10px] font-mono tracking-wider">
+                                    <Mail className="w-3 h-3" />
+                                    {item.userEmail || "NO EMAIL"}
+                                </div>
+                            </div>
+
+                            {/* Status & Actions */}
+                            <div className="flex-none md:pt-1 flex flex-col items-end gap-3">
+                                <Badge variant="secondary" className="px-5 py-2 rounded-lg bg-black/5 dark:bg-white/5 text-black/40 dark:text-white/40 border border-black/5 dark:border-white/5 font-black text-[9px] uppercase tracking-[0.2em]">
+                                    Pending
+                                </Badge>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="gap-2 h-9 px-4 text-[10px] uppercase tracking-wider font-bold border-black/10 dark:border-white/10 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
+                                >
+                                    <MessageSquare className="w-3 h-3" />
+                                    উত্তর দিন
+                                </Button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }

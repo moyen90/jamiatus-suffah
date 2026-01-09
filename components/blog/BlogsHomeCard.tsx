@@ -1,9 +1,20 @@
+"use client"
+
 import { BlogType } from "@/apis/blogs/queries";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ModernBlogCard } from "./ModernBlogCard";
 import { Sparkles } from "lucide-react";
+import { useBlogs } from "@/providers/BlogProvider";
+import { useEffect } from "react";
 
 export const BlogsHomeCard = ({ blogs, isLoading }: { blogs?: BlogType[], isLoading?: boolean }) => {
+  const { setBlogs } = useBlogs();
+
+  useEffect(() => {
+    if (blogs) {
+      setBlogs(blogs);
+    }
+  }, [blogs, setBlogs]);
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-20">

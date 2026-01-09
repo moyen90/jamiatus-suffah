@@ -46,11 +46,12 @@ export const useGetBlogs = () => {
 };
 
 // Get Blog by ID
-export const useGetBlogById = (id: string) => {
+export const useGetBlogById = (id: string, options = {}) => {
   return useQuery({
     queryKey: ["blog", id],
     queryFn: () => getBlogById(id),
     enabled: !!id,
+    ...options,
   });
 };
 
