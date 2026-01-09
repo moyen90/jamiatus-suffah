@@ -61,6 +61,7 @@
     "cmdk": "1.0.4",
     "date-fns": "latest",
     "embla-carousel-react": "8.5.1",
+    "firebase": "^12.7.0",
     "highlight.js": "^11",
     "input-otp": "1.4.1",
     "lowlight": "^3.3.0",

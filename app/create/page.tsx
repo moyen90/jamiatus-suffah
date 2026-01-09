@@ -15,16 +15,18 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { CalendarIcon, FileText, Edit, Eye, Split } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import MarkdownEditor from "@/components/markdown-editor"
 import MarkdownPreview from "@/components/markdown-preview"
 import { useCreateBlog } from "@/apis/blogs"
+import { CategorySelector } from "@/components/category-selector"
+import { useAuth } from "@/providers/AuthProvider"
 
 const formSchema = z.object({
   title: z.string().min(2, { message: "Title must be at least 2 characters." }),
   content: z.string().min(10, { message: "Content must be at least 10 characters." }),
-  category: z.string().min(2, { message: "Category must be at least 2 characters." }),
+  categories: z.array(z.string()).min(1, { message: "At least one category must be selected." }),
 })
 
 const estimateReadTime = (content: string) => {
@@ -38,15 +40,29 @@ const CreatePage = () => {
   const [viewMode, setViewMode] = useState<"edit" | "preview" | "split">("edit")
   const router = useRouter()
   const { mutateAsync } = useCreateBlog()
-
+  const { user, loading, isAdmin } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login")
+    }
+  }, [loading, user, router])
+
+  if (loading || !user) {
+    return (
+      <div className="container mx-auto py-10 flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
+      </div>
+    )
+  }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
       content: "",
-      category: "",
+      categories: [],
     },
   })
 
@@ -54,10 +70,14 @@ const CreatePage = () => {
     console.log(values)
     try {
       setIsLoading(true)
+      const token = await user?.getIdToken()
       await mutateAsync({
-        title: values.title,
-        content: values.content,
-        category: values.category,
+        values: {
+          title: values.title,
+          content: values.content,
+          categories: values.categories,
+        },
+        token,
       })
       router.push("/")
       setIsLoading(false)
@@ -173,30 +193,19 @@ const CreatePage = () => {
 
                 <FormField
                   control={form.control}
-                  name="category"
+                  name="categories"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>ক্যাটাগরি</FormLabel>
-                      {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a category" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Development">Development</SelectItem>
-                          <SelectItem value="Design">Design</SelectItem>
-                          <SelectItem value="React">React</SelectItem>
-                          <SelectItem value="TypeScript">TypeScript</SelectItem>
-                          <SelectItem value="CSS">CSS</SelectItem>
-                          <SelectItem value="Performance">Performance</SelectItem>
-                        </SelectContent>
-                      </Select> */}
-
+                      <FormLabel>ক্যাটাগরি নির্ধারণ করুন</FormLabel>
                       <FormControl>
-                        <Input placeholder="ক্যাটাগরি লিখুন" {...field} />
+                        <CategorySelector
+                          initialPath={field.value}
+                          onSelect={(path: string[]) => {
+                            form.setValue("categories", path)
+                          }}
+                        />
                       </FormControl>
-                      <FormDescription>মাসায়েল এর ক্যাটাগরি.</FormDescription>
+                      <FormDescription>সঠিক ক্যাটাগরি এবং সাব-ক্যাটাগরি নির্বাচন করুন।</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -205,8 +214,8 @@ const CreatePage = () => {
             </Card>
           </div>
 
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Creating..." : "Create Blog"}
+          <Button type="submit" disabled={isLoading} className="w-full lg:w-auto">
+            {isLoading ? "সংরক্ষণ করা হচ্ছে..." : "মাসায়েল তৈরি করুন"}
           </Button>
         </form>
       </Form>

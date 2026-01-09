@@ -9,14 +9,14 @@ export type BlogType = {
   content: string;
   description: string;
   date: string;          // ISO date string
-  category?: string;
+  categories: string[];
   createdAt?: number;    // timestamp, optional
 };
 
 // Create Blog
 export const useCreateBlog = () => {
   return useMutation({
-    mutationFn: createBlog,
+    mutationFn: ({ values, token }: { values: any; token?: string }) => createBlog({ values, token }),
     onSuccess: () => toast.success("Blog created successfully!"),
     onError: (error: any) =>
       toast.error(error?.response?.data?.message || "Failed to create blog"),
@@ -57,7 +57,7 @@ export const useUpdateBlog = () => {
 // Delete Blog
 export const useDeleteBlog = () => {
   return useMutation({
-    mutationFn: deleteBlog,
+    mutationFn: ({ id, token }: { id: string; token?: string }) => deleteBlog({ id, token }),
     onSuccess: () => toast.success("Blog deleted successfully!"),
     onError: (error: any) => toast.error(error?.response?.data?.message || "Failed to delete blog"),
   });
