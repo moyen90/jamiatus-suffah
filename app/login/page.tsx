@@ -9,7 +9,7 @@ import { auth, googleProvider } from "@/lib/firebase"
 import { signInWithPopup } from "firebase/auth"
 import { useAuth } from "@/providers/AuthProvider"
 
-export default function LoginPage() {
+function LoginContent() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const callbackUrl = searchParams.get("callbackUrl") || "/"
@@ -94,5 +94,13 @@ export default function LoginPage() {
                 </CardFooter>
             </Card>
         </div>
+    )
+}
+
+export default function LoginPage() {
+    return (
+        <React.Suspense fallback={null}>
+            <LoginContent />
+        </React.Suspense>
     )
 }
