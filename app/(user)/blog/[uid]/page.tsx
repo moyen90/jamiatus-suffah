@@ -8,16 +8,9 @@ interface BlogPostPageProps {
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { uid } = await params
 
-  let blog = null;
-  try {
-    blog = await getBlogById(uid);
-  } catch (error) {
-    console.error("Failed to fetch blog on server:", error);
-  }
-
   return (
     <div>
-      <Details uid={uid} blog={blog} />
+      <Details uid={uid} />
     </div>
   )
 }

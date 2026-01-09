@@ -1,29 +1,31 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createUser, deleteUser, getUserById, updateUser, UserType } from "./apis";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { createPerson, deletePerson, getPersonById, updatePerson, UserType } from "./apis";
 
-export const useCreateUser = () => {
+export const useCreatePerson = () => {
     return useMutation({
-        mutationFn: createUser,
+        mutationFn: ({ userData, token }: { userData: Partial<UserType>; token?: string }) =>
+            createPerson({ userData, token }),
     });
 };
 
-export const useUpdateUser = () => {
+export const useUpdatePerson = () => {
     return useMutation({
-        mutationFn: ({ uid, userData }: { uid: string; userData: Partial<UserType> }) =>
-            updateUser(uid, userData),
+        mutationFn: ({ uid, userData, token }: { uid: string; userData: Partial<UserType>; token?: string }) =>
+            updatePerson({ uid, userData, token }),
     });
 };
 
-export const useGetUserById = (uid: string) => {
+export const useGetPersonById = (uid: string) => {
     return useQuery({
-        queryKey: ["user", uid],
-        queryFn: () => getUserById(uid),
+        queryKey: ["person", uid],
+        queryFn: () => getPersonById(uid),
         enabled: !!uid,
     });
 };
 
-export const useDeleteUser = () => {
+export const useDeletePerson = () => {
     return useMutation({
-        mutationFn: deleteUser,
+        mutationFn: ({ uid, token }: { uid: string; token?: string }) =>
+            deletePerson({ uid, token }),
     });
 };
