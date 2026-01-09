@@ -58,7 +58,8 @@ export const useGetBlogById = (id: string, options = {}) => {
 // Update Blog
 export const useUpdateBlog = () => {
   return useMutation({
-    mutationFn: updateBlog,
+    mutationFn: ({ id, data, token }: { id: string; data: any; token?: string }) =>
+      updateBlog({ id, data, token }),
     onSuccess: () => toast.success("Blog updated successfully!"),
     onError: (error: any) => toast.error(error?.response?.data?.message || "Failed to update blog"),
   });

@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
-import { createUser, UserType } from '@/apis/users'
+import { createPerson, UserType } from '@/apis/users'
 
 interface AuthContextType {
     user: User | null
@@ -28,12 +28,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const syncUser = async (firebaseUser: User) => {
         try {
-            const response: any = await createUser({
-                uid: firebaseUser.uid,
-                name: firebaseUser.displayName || "",
-                email: firebaseUser.email || "",
-                photoURL: firebaseUser.photoURL || "",
-                emailVerified: firebaseUser.emailVerified,
+            const token = await firebaseUser.getIdToken();
+            const response: any = await createPerson({
+                userData: {
+                    uid: firebaseUser.uid,
+                    name: firebaseUser.displayName || "",
+                    email: firebaseUser.email || "",
+                    photoURL: firebaseUser.photoURL || "",
+                    emailVerified: firebaseUser.emailVerified,
+                },
+                token,
             });
             console.log("User synchronized with backend");
             if (response?.data) {

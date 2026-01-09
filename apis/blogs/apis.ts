@@ -59,9 +59,11 @@ export const getBlogById = async (id: string) => {
 };
 
 // Update blog
-export const updateBlog = async ({ id, data }: { id: string; data: any }) => {
+export const updateBlog = async ({ id, data, token }: { id: string; data: any; token?: string }) => {
   try {
-    const response = await apiClient.put(`${BLOG}/${id}`, data);
+    const response = await apiClient.put(`${BLOG}/${id}`, data, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
     return response.data;
   } catch (error) {
     console.error("Error updating blog", error);

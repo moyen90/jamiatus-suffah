@@ -1,6 +1,6 @@
 "use client";
 
-import { notFound } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   UserIcon,
   CalendarIcon,
@@ -29,13 +29,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/providers/AuthProvider";
 import { Badge } from "@/components/ui/badge";
 import { BlogType } from "@/apis/blogs/queries";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
+import { useAuth } from "@/providers/AuthProvider";
 import { useBlogs } from "@/providers/BlogProvider";
 
 export const Details = ({ blog: initialBlog, uid }: { blog?: BlogType | null, uid: string }) => {
@@ -59,10 +58,10 @@ export const Details = ({ blog: initialBlog, uid }: { blog?: BlogType | null, ui
 
   // Sync state if fetched
   useEffect(() => {
-    if (fetchedBlog && !blog) {
+    if (fetchedBlog) {
       setBlog(fetchedBlog);
     }
-  }, [fetchedBlog, blog]);
+  }, [fetchedBlog]);
 
   useEffect(() => {
     if (blogFromContext) {
@@ -80,20 +79,33 @@ export const Details = ({ blog: initialBlog, uid }: { blog?: BlogType | null, ui
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if ((!blog && isFetching)) {
-    return (
-      <div className="container mx-auto py-20 flex flex-col items-center justify-center min-h-[600px] space-y-4">
-        <div className="relative w-24 h-24">
-          <div className="absolute inset-x-0 inset-y-0 rounded-full border-4 border-black/5 dark:border-white/5"></div>
-          <div className="absolute inset-x-0 inset-y-0 rounded-full border-4 border-t-black dark:border-t-white animate-spin"></div>
+  if (!blog) {
+    if (isFetching) {
+      return (
+        <div className="container mx-auto py-20 flex flex-col items-center justify-center min-h-[600px] space-y-4">
+          <div className="relative w-24 h-24">
+            <div className="absolute inset-0 rounded-full border-4 border-black/5 dark:border-white/5"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-t-black dark:border-t-white animate-spin"></div>
+          </div>
+          <p className="text-black dark:text-white font-black text-sm uppercase tracking-[0.3em] animate-pulse">সংগ্রহ করা হচ্ছে...</p>
         </div>
-        <p className="text-black dark:text-white font-black text-sm uppercase tracking-[0.3em] animate-pulse">সংগ্রহ করা হচ্ছে...</p>
+      );
+    }
+
+    return (
+      <div className="container mx-auto py-20 flex flex-col items-center justify-center min-h-[600px] space-y-8">
+        <div className="text-center space-y-4">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter">মাসায়েলটি পাওয়া যায়নি</h2>
+          <p className="text-muted-foreground text-xl font-medium">দুঃখিত, আপনি যে মাসায়েলটি খুঁজছেন সেটি খুঁজে পাওয়া যায়নি অথবা মুছে ফেলা হয়েছে।</p>
+        </div>
+        <Button
+          onClick={() => router.push("/")}
+          className="rounded-full px-12 h-14 text-lg font-black bg-black dark:bg-white text-white dark:text-black hover:scale-105 transition-transform"
+        >
+          হোম পেজে ফিরে যান
+        </Button>
       </div>
     );
-  }
-
-  if (!blog) {
-    notFound();
   }
 
   const handleDelete = async () => {
