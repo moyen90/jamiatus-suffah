@@ -1,13 +1,9 @@
-"use client";
-
-import { useGetBlogs } from "@/apis/blogs";
+import { BlogType } from "@/apis/blogs/queries";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ModernBlogCard } from "./ModernBlogCard";
 import { Sparkles } from "lucide-react";
 
-export const BlogsHomeCard = () => {
-  const { data: blogs, isLoading } = useGetBlogs();
-
+export const BlogsHomeCard = ({ blogs, isLoading }: { blogs?: BlogType[], isLoading?: boolean }) => {
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-20">

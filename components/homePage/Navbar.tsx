@@ -3,8 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { Button } from '../ui/button';
-import { LogIn, HelpCircle } from 'lucide-react';
-import { ModeToggle } from '../mode-toggle';
+import { HelpCircle, LogIn } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { UserNav } from './UserNav';
 
@@ -29,15 +28,33 @@ export const Navbar = () => {
 
             <div className="h-6 w-px bg-primary/10 mx-2 hidden md:block" />
 
-            <Link href="/ask">
-              <Button className="hidden md:flex items-center gap-2 font-bold rounded-xl px-5">
-                <HelpCircle className="h-4 w-4" />
-                মাসালা-মাসায়েল জিজ্ঞাসা করুন
-              </Button>
-              <Button size="icon" className="md:hidden rounded-xl">
-                <HelpCircle className="h-4 w-4" />
-              </Button>
-            </Link>
+            {user && (user.email === 'dev.moyenislam@gmail.com' || user.email === 'muftyrobiulislam@gmail.com') && (
+              <Link href="/questions" className="hidden md:block">
+                <Button variant="ghost" className="font-semibold px-4 py-2 hover:bg-black/5 dark:hover:bg-white/5">জিজ্ঞাসা দেখুন</Button>
+              </Link>
+            )}
+
+            {user && (user.email === 'dev.moyenislam@gmail.com' || user.email === 'muftyrobiulislam@gmail.com') ? (
+              <Link href="/create">
+                <Button className="hidden md:flex items-center gap-2 font-bold rounded-xl px-5">
+                  <HelpCircle className="h-4 w-4" />
+                  মাসালা লিখুন
+                </Button>
+                <Button size="icon" className="md:hidden rounded-xl">
+                  <HelpCircle className="h-4 w-4" />
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/ask">
+                <Button className="hidden md:flex items-center gap-2 font-bold rounded-xl px-5">
+                  <HelpCircle className="h-4 w-4" />
+                  মাসালা-মাসায়েল জিজ্ঞাসা করুন
+                </Button>
+                <Button size="icon" className="md:hidden rounded-xl">
+                  <HelpCircle className="h-4 w-4" />
+                </Button>
+              </Link>
+            )}
 
             {!loading && (
               <>
@@ -53,8 +70,6 @@ export const Navbar = () => {
                 )}
               </>
             )}
-
-            <ModeToggle />
           </div>
         </div>
       </nav>

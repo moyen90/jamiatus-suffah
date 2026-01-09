@@ -1,5 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createQuestion, QuestionData } from "./apis";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createQuestion, getQuestions, QuestionData } from "./apis";
+
+export const useGetQuestions = (token?: string) => {
+    return useQuery({
+        queryKey: ["questions", token],
+        queryFn: () => getQuestions(token),
+        enabled: !!token,
+    });
+};
 
 export const useCreateQuestion = () => {
     const queryClient = useQueryClient();

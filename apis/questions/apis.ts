@@ -19,3 +19,14 @@ export const createQuestion = async ({ data, token }: { data: QuestionData; toke
         throw error;
     }
 };
+export const getQuestions = async (token?: string) => {
+    try {
+        const response = await apiClient.get(QUESTION, {
+            headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
+        return response.data.data;
+    } catch (error) {
+        console.error("Error fetching questions", error);
+        throw error;
+    }
+};

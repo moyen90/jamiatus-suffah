@@ -26,7 +26,7 @@ export const ModernBlogCard = ({
     readTime = "৫ মিনিট",
 }: ModernBlogCardProps) => {
     return (
-        <Link href={`/details/${uid}`} className="group block h-full">
+        <Link href={`/blog/${uid}`} className="group block h-full">
             <Card className="h-full overflow-hidden border border-primary/5 glass-card transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col p-8 md:p-10">
                 <div className="flex-1 space-y-6">
                     <div className="flex flex-wrap items-center gap-3">

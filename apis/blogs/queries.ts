@@ -3,6 +3,12 @@ import { createBlog, deleteBlog, getBlogById, getBlogs, updateBlog } from "./api
 import { toast } from "react-toastify";
 
 
+export type UserDetail = {
+  name: string;
+  address: string;
+  email: string;
+};
+
 export type BlogType = {
   uid: string;
   title: string;
@@ -10,6 +16,9 @@ export type BlogType = {
   description: string;
   date: string;          // ISO date string
   categories: string[];
+  asked_by?: UserDetail;
+  answered_by?: UserDetail;
+  author?: string;
   createdAt?: number;    // timestamp, optional
 };
 
