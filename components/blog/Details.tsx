@@ -33,6 +33,7 @@ import { Badge } from "@/components/ui/badge";
 import { BlogType } from "@/apis/blogs/queries";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 import { useAuth } from "@/providers/AuthProvider";
 import { useBlogs } from "@/providers/BlogProvider";
@@ -137,8 +138,23 @@ export const Details = ({ blog: initialBlog, uid }: { blog?: BlogType | null, ui
           </Button>
 
           <div className="flex items-center gap-4">
-            <Button variant="outline" size="icon" className="rounded-full shadow-sm border-black/10 dark:border-white/10 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-              <Share2 className="w-5 h-5" />
+            <Button
+              variant="outline"
+              size={copied ? "default" : "icon"}
+              onClick={handleCopy}
+              className={cn(
+                "rounded-full shadow-sm border-black/10 dark:border-white/10 transition-all duration-300",
+                copied ? "bg-black text-white dark:bg-white dark:text-black w-auto px-6 h-10" : "hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+              )}
+            >
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4 mr-2" />
+                  কপি হয়েছে
+                </>
+              ) : (
+                <Share2 className="w-5 h-5" />
+              )}
             </Button>
             {!authLoading && isAdmin && (
               <div className="flex items-center gap-4">
