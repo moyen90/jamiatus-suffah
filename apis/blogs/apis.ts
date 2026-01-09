@@ -3,6 +3,12 @@ import { apiClient } from "@/utils/apiCLient";
 import { BLOG } from "./endpoints";
 
 // Define BlogType or import it from the correct module
+type UserDetail = {
+  name: string;
+  address: string;
+  email: string;
+};
+
 type BlogType = {
   uid: string;
   title: string;
@@ -10,6 +16,9 @@ type BlogType = {
   description: string;
   date: string;          // ISO date string
   categories: string[];
+  asked_by?: UserDetail;
+  answered_by?: UserDetail;
+  author?: string;
   createdAt?: number;    // timestamp, optional
 };
 
@@ -42,7 +51,7 @@ export const getBlogs = async (): Promise<BlogType[]> => {
 export const getBlogById = async (id: string) => {
   try {
     const response = await apiClient.get(`${BLOG}/${id}`);
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error("Error fetching blog by id", error);
     throw error;
