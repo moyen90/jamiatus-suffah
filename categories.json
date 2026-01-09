@@ -1,0 +1,257 @@
+[
+    {
+        "name": "হিকমত বা জ্ঞান",
+        "sub_categories": [
+            {
+                "name": "এক: বস্তু সংক্রান্ত জ্ঞান",
+                "sub_categories": [
+                    {
+                        "name": "১- সকল বস্তু সংক্রান্ত জ্ঞান- ইলমুত তবয়ি",
+                        "sub_categories": [
+                            {
+                                "name": "জীব বিজ্ঞান",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "পদার্থ বিজ্ঞান",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "রসায়ন বিজ্ঞান",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "চিকিৎসা বিজ্ঞান",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "জ্যোতির্বিজ্ঞান-Astronomy",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "ভৌগোলিক বিজ্ঞান",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "অর্থনৈতিক বিজ্ঞান",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "সমাজ বিজ্ঞান",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "রাষ্ট্র বিজ্ঞান",
+                                "sub_categories": []
+                            },
+                            {
+                                "name": "আইটিসি তথা- যোগাযোগ ও প্রযুক্তি/টেকনোলজি বিজ্ঞান",
+                                "sub_categories": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "২- সকল ভাষার বর্ণ, সংখ্যা ও জ্যামিতিক নকশা সংক্রান্ত জ্ঞান- ইলমুর রিয়াদি",
+                        "sub_categories": []
+                    },
+                    {
+                        "name": "৩- ইলমুল ইলাহি- সৃষ্টিকর্তা।",
+                        "sub_categories": []
+                    }
+                ]
+            },
+            {
+                "name": "দুই: কর্ম সংক্রান্ত জ্ঞান",
+                "sub_categories": [
+                    {
+                        "name": "১- পার্থিব জীবন সংক্রান্ত কর্ম",
+                        "sub_categories": [
+                            {
+                                "name": "জীবন সামগ্রী উতপাদন, সরবরাহ ও ব্যবহার",
+                                "sub_categories": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "২- পরকালীন জীবন সংক্রান্ত কর্ম",
+                        "sub_categories": [
+                            {
+                                "name": "ক- ওসায়েল/উপকরণ সংক্রান্ত জ্ঞান বা ফুনুনাত/পারিভাষিক জ্ঞান",
+                                "sub_categories": [
+                                    {
+                                        "name": "নাহু",
+                                        "sub_categories": []
+                                    },
+                                    {
+                                        "name": "সরফ",
+                                        "sub_categories": []
+                                    },
+                                    {
+                                        "name": "মা'আনি",
+                                        "sub_categories": []
+                                    },
+                                    {
+                                        "name": "বদি'",
+                                        "sub_categories": []
+                                    },
+                                    {
+                                        "name": "বয়ান",
+                                        "sub_categories": []
+                                    },
+                                    {
+                                        "name": "ফালসাফা",
+                                        "sub_categories": []
+                                    },
+                                    {
+                                        "name": "মানতেক",
+                                        "sub_categories": []
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "খ- মাকাসেদ তথা- চুড়ান্ত জ্ঞান",
+                                "sub_categories": [
+                                    {
+                                        "name": "১- ব্যক্তি সংক্রান্ত কর্ম",
+                                        "sub_categories": [
+                                            {
+                                                "name": "ক- ঈমানিয়্যাত",
+                                                "sub_categories": [
+                                                    {
+                                                        "name": "সঠিক বিশ্বাস",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "ভ্রান্ত বিশ্বাস",
+                                                        "sub_categories": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "খ- আমালিয়্যাত",
+                                                "sub_categories": [
+                                                    {
+                                                        "name": "পবিত্রতা",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "নামায",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "রোজা",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "হজ",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "যাকাত",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "বিবাহ",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "অন্নান্ন",
+                                                        "sub_categories": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "২- সমাজ সংক্রান্ত কর্ম",
+                                        "sub_categories": [
+                                            {
+                                                "name": "ক- মুআমালাত",
+                                                "sub_categories": [
+                                                    {
+                                                        "name": "ক্রয়-বিক্রয়- বাই-শেরা'",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "ভাড়া- ইজারাহ",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "ধার- ইআরাহ",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "ঋণ- করদ",
+                                                        "sub_categories": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "খ- আখলাকিয়্যাত- ব্যক্তির চরিত্র",
+                                                "sub_categories": [
+                                                    {
+                                                        "name": "আল্লাহভীতি- তাকওয়া",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "ধৈর্য- সবর",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "বিনয়- তাওয়াদু",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "দয়া ও মায়া- রহমাহ",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "কৃতজ্ঞতা- শোকর",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "সততা- ছিদক",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "আমিত্বহীনতা- ইখলাস",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "ক্ষমাশীলতা- আফব",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "নিয়মানুবর্তিতা- আদল",
+                                                        "sub_categories": []
+                                                    },
+                                                    {
+                                                        "name": "আমানতদারিতা- আমানাহ",
+                                                        "sub_categories": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "গ- মুআশারাত- সামাজিক রীতি-নীতি",
+                                                "sub_categories": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "৩- রাষ্ট্র সংক্রান্ত কর্ম",
+                                        "sub_categories": [
+                                            {
+                                                "name": "শান্তি-সৃঙ্খলা সংক্রান্ত আইন, তার প্রয়োগ এবং শাস্তি ও পুরস্কার তথা- বিচার বিভাগ।",
+                                                "sub_categories": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
