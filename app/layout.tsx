@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blogs",
-  description: "This is Islamic BLogs.",
+  title: "Jamiatus Suffah",
+  description: "Suffah center",
 };
 
 export default function RootLayout({
